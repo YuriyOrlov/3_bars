@@ -11,25 +11,11 @@ def load_data(filepath):
 
 
 def get_biggest_bar(data):
-    biggest_bar_num_seats = 0
-    biggest_bar_name = ''
-    for item in data:
-        num_seats_in_bar = item.get('SeatsCount')
-        if biggest_bar_num_seats < num_seats_in_bar:
-            biggest_bar_num_seats = num_seats_in_bar
-            biggest_bar_name = item.get('Name')
-    return biggest_bar_name
+    return max(data, key=lambda x: x.get('SeatsCount')).get('Name')
 
 
 def get_smallest_bar(data):
-    smallest_bar_num_seats = 0
-    smallest_bar_name = ''
-    for item in data:
-        num_seats_in_bar = item.get('SeatsCount')
-        if smallest_bar_num_seats >= num_seats_in_bar:
-            smallest_bar_num_seats = num_seats_in_bar
-            smallest_bar_name = item.get('Name')
-    return smallest_bar_name
+    return min(data, key=lambda x: x.get('SeatsCount')).get('Name')
 
 
 def get_closest_bar(data, longitude, latitude):
