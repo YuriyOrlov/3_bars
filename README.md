@@ -5,16 +5,16 @@
 Ссылка: http://data.mos.ru/opendata/7710881420-bary
 
 Он позволяет:
-*ul выбрать самый большой бар
-*ul выбрать самый мальнький бар
-*ul выбрать ближайший бар при введении координат с клавиатуры из консоли
+* ul выбрать самый большой бар
+* ul выбрать самый мальнький бар
+* ul выбрать ближайший бар при введении координат с клавиатуры из консоли
 
 ------------------------------
 This script works with JSON file taken from open data portal of Moscow city government.
 It lets you to do the following:
-*ul choose the biggest bar in Moscow
-*ul choose the smallest bar in Moscow
-*ul choose the nearest bar to your current location if you enter your coordinates from keyboard in console
+* ul choose the biggest bar in Moscow
+* ul choose the smallest bar in Moscow
+* ul choose the nearest bar to your current location if you enter your coordinates from keyboard in console
 
 # Как запустить
 
