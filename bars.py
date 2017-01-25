@@ -37,7 +37,7 @@ def get_closest_bar(data, longitude, latitude):
     closest_bar_name = ''
     for item in data:
         bar_coords = item.get('geoData').get('coordinates')
-        bar_longitude, bar_latitude = [float(item) for item in bar_coords]
+        bar_latitude, bar_longitude = [float(item) for item in bar_coords]
         distance_from_user = float(sqrt((bar_longitude - longitude)**2 + (bar_latitude - latitude)**2))
         if closest_bar >= distance_from_user or closest_bar is 0:
             closest_bar = distance_from_user
@@ -47,11 +47,11 @@ def get_closest_bar(data, longitude, latitude):
 
 if __name__ == '__main__':
     data = load_data("./bars.json")
-    print(get_biggest_bar(data))
-    print(get_smallest_bar(data))
-    user_coords = input('Enter your coordinates ("longitude;latitude") using semicolon(";") as a splitter> ')
+    print("\nThe biggest bar is: {}".format(get_biggest_bar(data)))
+    print("\nThe smallest bar is: {}".format(get_smallest_bar(data)))
+    user_coords = input('\nEnter your coordinates ("longitude;latitude") using semicolon(";") as a splitter> ')
     if ';' in user_coords:
         user_coords = [float(item.strip().replace(',', '.')) for item in user_coords.split(';')]
     else:
         raise IOError("Invalid coordinates!")
-    print(get_closest_bar(data, longitude=user_coords[0], latitude=user_coords[1]))
+    print("\nThe closest bar is: {}".format(get_closest_bar(data, longitude=user_coords[0], latitude=user_coords[1])))
