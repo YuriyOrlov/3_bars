@@ -1,21 +1,57 @@
 import json
+import os
+from math import sqrt
 
 
 def load_data(filepath):
-    pass
+    if not os.path.exists(filepath):
+        return None
+    with open(filepath, 'r', encoding='cp1251') as json_file:
+        return json.load(json_file)
 
 
 def get_biggest_bar(data):
-    pass
+    biggest_bar_num_seats = 0
+    biggest_bar_name = ''
+    for item in data:
+        num_seats_in_bar = item.get('SeatsCount')
+        if biggest_bar_num_seats < num_seats_in_bar:
+            biggest_bar_num_seats = num_seats_in_bar
+            biggest_bar_name = item.get('Name')
+    return biggest_bar_name
 
 
 def get_smallest_bar(data):
-    pass
+    smallest_bar_num_seats = 0
+    smallest_bar_name = ''
+    for item in data:
+        num_seats_in_bar = item.get('SeatsCount')
+        if smallest_bar_num_seats >= num_seats_in_bar:
+            smallest_bar_num_seats = num_seats_in_bar
+            smallest_bar_name = item.get('Name')
+    return smallest_bar_name
 
 
 def get_closest_bar(data, longitude, latitude):
-    pass
+    closest_bar = 0
+    closest_bar_name = ''
+    for item in data:
+        bar_coords = item.get('geoData').get('coordinates')
+        bar_longitude, bar_latitude = [float(item) for item in bar_coords]
+        distance_from_user = float(sqrt((bar_longitude - longitude)**2 + (bar_latitude - latitude)**2))
+        if closest_bar >= distance_from_user or closest_bar is 0:
+            closest_bar = distance_from_user
+            closest_bar_name = item.get('Name')
+    return closest_bar_name
 
 
 if __name__ == '__main__':
-    pass
+    data = load_data("./bars.json")
+    print(get_biggest_bar(data))
+    print(get_smallest_bar(data))
+    user_coords = input('Enter your coordinates ("longitude;latitude") using semicolon(";") as a splitter> ')
+    if ';' in user_coords:
+        user_coords = [float(item.strip().replace(',', '.')) for item in user_coords.split(';')]
+    else:
+        raise IOError("Invalid coordinates!")
+    print(get_closest_bar(data, longitude=user_coords[0], latitude=user_coords[1]))
